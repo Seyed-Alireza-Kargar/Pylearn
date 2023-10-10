@@ -3,10 +3,8 @@ from colorama import Fore, Back, Style, init
 import time
 import random
 
-# Initialize colorama
 init(autoreset=True)
 
-# Function to display the game board
 def show():
     for i in range(3):
         for j in range(3):
@@ -18,7 +16,6 @@ def show():
                 print(game_board[i][j], end="")
         print()
 
-# Function to check for a win
 def check_game():
     for i in range(3):
         if game_board[i][0] == game_board[i][1] == game_board[i][2] and game_board[i][0] != '-':
@@ -36,7 +33,6 @@ def check_game():
 
     return False
 
-# Function to check for a tie
 def is_board_full():
     for i in range(3):
         for j in range(3):
@@ -44,7 +40,6 @@ def is_board_full():
                 return False
     return True
 
-# Function for player vs player mode
 def player_vs_player():
     while True:
         print("Player 1")
@@ -91,7 +86,6 @@ def player_vs_player():
             print("It's a tie!")
             break
 
-# Function for player vs CPU mode
 def player_vs_cpu():
     while True:
         print("Player")
@@ -134,7 +128,6 @@ def player_vs_cpu():
             print("It's a tie!")
             break
 
-# Main function to start the game
 def play_game():
     global game_board
     game_board = [["-", "-", "-"],
@@ -156,7 +149,6 @@ def play_game():
     else:
         print("Invalid choice. Please try again.")
 
-# Measure elapsed time for the game
 start_time = time.time()
 play_game()
 end_time = time.time()
