@@ -2,6 +2,8 @@
 
 This project is a video media management system implemented in Python.
 
+![Media Management](https://www.freecodecamp.org/news/content/images/2021/08/chris-ried-ieic5Tq8YMk-unsplash.jpg)
+
 ## Installation and Execution
 
 1. **Install Required Modules:**
@@ -17,12 +19,15 @@ This project is a video media management system implemented in Python.
 ## Project Structure
 
 - **actor.py:** Contains code for the Actor class defining the actors.
-- **media.py:** Holds code for the Media class and its subclasses Film, Series, Documentary, and Clip managing video media.
-- **main.py:** Demonstrates executable examples of using the classes and creating videos.
+- **film.py:** Holds the Film class managing films.
+- **series.py:** Holds the Series class managing TV series.
+- **documentary.py:** Holds the Documentary class managing documentaries.
+- **clip.py:** Holds the Clip class managing short clips.
+- **media.py:** Contains the base Media class used by Film, Series, Documentary, and Clip classes.
 
 ## Usage
 
-To utilize the video media management system, you can use the code provided in the `main.py` file. Create different types of media and view their information or even download them.
+To utilize the video media management system, create instances of different media types using the provided classes and interact with their methods.
 
 ## Important Notes
 
