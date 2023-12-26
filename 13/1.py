@@ -9,7 +9,15 @@ class Invader(arcade.Sprite):
         self.width = 60
         self.height = 60 
         self.angle = 180
-        
+
+class Bullet(arcade.Sprite):
+    def __init__(self, source, angle, speed):
+        super().__init__(":resources:images/space_shooter/laserBlue01.png")
+        self.center_x = source.center_x
+        self.center_y = source.center_y
+        self.angle = angle
+        self.change_y = speed
+
 class Spaceship(arcade.Sprite):
     def __init__(self, game):
         super().__init__(":resources:images/space_shooter/playerShip1_blue.png")
@@ -18,6 +26,31 @@ class Spaceship(arcade.Sprite):
         self.width = 60
         self.height = 60 
         self.speed = 15
+        self.bullet_list = arcade.SpriteList()
+
+    def fire_bullet(self):
+        bullet = Bullet(self, 90, 5)
+        self.bullet_list.append(bullet)
+
+    def update_bullets(self):
+        for bullet in self.bullet_list:
+            bullet.center_y += bullet.change_y
+            if bullet.top < 0:
+                self.bullet_list.remove(bullet)
+
+    def draw_bullets(self):
+        self.bullet_list.draw()
+
+    def on_key_press(self, symbol: int, modifiers: int):
+        if symbol == arcade.key.A:
+            self.center_x -= self.speed
+        elif symbol == arcade.key.D:
+            self.center_x += self.speed
+        elif symbol == arcade.key.SPACE:
+            self.fire_bullet()
+
+    def update(self):
+        self.update_bullets()
 
 class GameWindow(arcade.Window):
     def __init__(self):
@@ -33,15 +66,14 @@ class GameWindow(arcade.Window):
 
         self.player.draw()
         self.invader.draw()
+        self.player.draw_bullets()
 
     def on_key_press(self, symbol: int, modifiers: int):
-        if symbol == arcade.key.A:
-            self.player.center_x -= self.player.speed
-        elif symbol == arcade.key.D:
-            self.player.center_x += self.player.speed
+        self.player.on_key_press(symbol, modifiers)
 
     def on_update(self, delta_time: float):
         self.invader.center_y -= 1
+        self.player.update()
 
 def main():
     game_window = GameWindow()
