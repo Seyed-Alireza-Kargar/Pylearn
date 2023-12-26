@@ -9,6 +9,7 @@ class Invader(arcade.Sprite):
         self.width = 60
         self.height = 60 
         self.angle = 180
+        self.can_move = True
 
 class Bullet(arcade.Sprite):
     def __init__(self, source, angle, speed):
@@ -59,6 +60,7 @@ class GameWindow(arcade.Window):
         self.background = arcade.load_texture(":resources:images/backgrounds/stars.png")
         self.player = Spaceship(self)
         self.invader = Invader(self)
+        self.invader_hit = False
 
     def on_draw(self):
         arcade.start_render()
@@ -74,15 +76,18 @@ class GameWindow(arcade.Window):
     def on_update(self, delta_time: float):
         for bullet in self.player.bullet_list:
             if bullet.collides_with_sprite(self.invader):
-                saved_position = (self.invader.center_x, self.invader.center_y)
-                self.player.bullet_list.remove(bullet)
+                if not self.invader_hit:
+                    self.invader_hit = True
+                    saved_position = (self.invader.center_x, self.invader.center_y)
+                    self.player.bullet_list.remove(bullet)
 
-                # تغییر تصویر هواپیمای دشمن به تصویر مورد نظر
-                self.invader.texture = arcade.load_texture(":resources:images/space_shooter/meteorGrey_small2.png")
-                self.invader.center_x, self.invader.center_y = saved_position
-                break  # برای فقط یک بار تغییر تصویر دشمن
+                    self.invader.texture = arcade.load_texture(":resources:images/space_shooter/meteorGrey_small2.png")
+                    self.invader.center_x, self.invader.center_y = saved_position
+                    self.invader.can_move = False
+                    break
 
-        self.invader.center_y -= 1
+        if self.invader.can_move:
+            self.invader.center_y -= 1
         self.player.update()
 
 def main():
