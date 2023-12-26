@@ -5,29 +5,27 @@
 ## Description
 
 This project contains two main files:
-- `1.py`: Contains a space shooter game where a spaceship avoids invaders.
-- `2.py`: Generates a pattern with alternating colors in an elliptical shape.
+
+| File | Description |
+|------|-------------|
+| 1.py | Contains a space shooter game where a spaceship avoids invaders. |
+| 2.py | Generates a pattern with alternating colors in an elliptical shape. |
 
 ## File Details
 
 ### 1.py
 
-#### Description
-This file implements a space shooter game using Arcade library.
+**Description:** This file implements a space shooter game using Arcade library.
 
-#### Usage
-Run `1.py` to start the game. Control the spaceship with 'A' and 'D' keys.
+**Usage:** Run `1.py` to start the game. Control the spaceship with 'A' and 'D' keys.
 
 ### 2.py
 
-#### Description
-This file generates a pattern of alternating colors in elliptical shapes.
+**Description:** This file generates a pattern of alternating colors in elliptical shapes.
 
-#### Usage
-Run `2.py` to generate the pattern.
+**Usage:** Run `2.py` to generate the pattern.
 
 ## How to Run
 
 - Install Arcade library (`pip install arcade`).
 - Run `1.py` or `2.py` to execute the respective scripts.
-
