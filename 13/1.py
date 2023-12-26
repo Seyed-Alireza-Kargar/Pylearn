@@ -72,6 +72,16 @@ class GameWindow(arcade.Window):
         self.player.on_key_press(symbol, modifiers)
 
     def on_update(self, delta_time: float):
+        for bullet in self.player.bullet_list:
+            if bullet.collides_with_sprite(self.invader):
+                saved_position = (self.invader.center_x, self.invader.center_y)
+                self.player.bullet_list.remove(bullet)
+
+                # تغییر تصویر هواپیمای دشمن به تصویر مورد نظر
+                self.invader.texture = arcade.load_texture(":resources:images/space_shooter/meteorGrey_small2.png")
+                self.invader.center_x, self.invader.center_y = saved_position
+                break  # برای فقط یک بار تغییر تصویر دشمن
+
         self.invader.center_y -= 1
         self.player.update()
 
