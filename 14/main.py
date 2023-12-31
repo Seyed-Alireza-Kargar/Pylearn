@@ -29,8 +29,8 @@ class Spaceship(arcade.Sprite):
         self.speed = 10
         self.bullet_list = arcade.SpriteList()
 
-        self.lives = 3  # تعداد جون‌ها
-        self.score = 0  # امتیاز بازیکن
+        self.lives = 3
+        self.score = 0
         self.explosion_sound = arcade.load_sound(":resources:sounds/explosion1.wav")
         self.shoot_sound = arcade.load_sound(":resources:sounds/laser1.wav")
 
@@ -46,7 +46,7 @@ class Spaceship(arcade.Sprite):
     def fire_bullet(self):
         bullet = Bullet(self, 90, 5)
         self.bullet_list.append(bullet)
-        arcade.play_sound(self.shoot_sound)  # پخش صدا
+        arcade.play_sound(self.shoot_sound)
 
     def update_bullets(self):
         for bullet in self.bullet_list:
@@ -80,9 +80,9 @@ class GameWindow(arcade.Window):
         self.background = arcade.load_texture(":resources:images/backgrounds/stars.png")
         self.player = Spaceship(self)
         self.invader_list = arcade.SpriteList()
-        self.enemy_spawn_timer = 0  # تایمر برای زمان ورود دشمنان
-        self.enemy_spawn_interval = 3  # فاصله زمانی بین ورود دشمنان
-        self.enemy_speed = 1  # سرعت اولیه دشمنان
+        self.enemy_spawn_timer = 0
+        self.enemy_spawn_interval = 3
+        self.enemy_speed = 1
 
     def on_draw(self):
         arcade.start_render()
@@ -100,7 +100,7 @@ class GameWindow(arcade.Window):
             invader = Invader(self)
             invader.speed = self.enemy_speed
             self.invader_list.append(invader)
-            self.enemy_speed += 0.1  # افزایش سرعت دشمنان
+            self.enemy_speed += 0.1
 
         for bullet in self.player.bullet_list:
             for invader in self.invader_list:
@@ -108,7 +108,7 @@ class GameWindow(arcade.Window):
                     self.player.bullet_list.remove(bullet)
                     self.invader_list.remove(invader)
                     self.player.score += 1
-                    arcade.play_sound(self.player.explosion_sound)  # پخش صدا
+                    arcade.play_sound(self.player.explosion_sound)
 
         for invader in self.invader_list:
             if invader.center_y < self.player.center_y:
