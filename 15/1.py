@@ -6,8 +6,8 @@ class Apple(arcade.Sprite):
         super().__init__("15/apple.png")
         self.width = 30
         self.height = 30
-        self.center_x = random.randint(10, game.width-10)
-        self.center_y = random.randint(10, game.height-10)
+        self.center_x = random.randint(20, game.width-20)
+        self.center_y = random.randint(20, game.height-20)
         self.change_x = 0
         self.change_y = 0
         
@@ -68,6 +68,8 @@ class Game(arcade.Window):
     def on_draw(self):
         arcade.start_render()
         self.snake.draw()
+        score_text = f"Score: {self.snake.score}"
+        arcade.draw_text(score_text, 10, 10, arcade.color.BLACK, 14)
         self.food.draw()
         arcade.finish_render()
 
@@ -87,11 +89,26 @@ class Game(arcade.Window):
 
     def on_update(self, delta_time: float):
         self.snake.move()
+
+        if (
+            self.snake.center_x < 0 or
+            self.snake.center_x > self.width or
+            self.snake.center_y < 0 or
+            self.snake.center_y > self.height
+        ):
+            arcade.set_background_color(arcade.color.KHAKI)
+            arcade.start_render()
+            game_over_text = "Game Over"
+            arcade.draw_text(game_over_text, self.width // 2 - 100, self.height // 2, arcade.color.BLACK, 30)
+
+            arcade.finish_render()
+            arcade.pause(2)
+            arcade.close_window()
+
         if arcade.check_for_collision(self.snake, self.food):
             self.snake.eat(self.food)
             self.food = Apple(self)
         
-
 if __name__ == "__main__":
     game = Game()
     arcade.run()
