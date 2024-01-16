@@ -4,13 +4,44 @@ import arcade
 class Apple(arcade.Sprite):
     def __init__(self, game):
         super().__init__("15/apple.png")
+        self.score_value = 1
+        self.init_position(game)
+
+    def init_position(self, game):
         self.width = 30
         self.height = 30
-        self.center_x = random.randint(20, game.width-20)
-        self.center_y = random.randint(20, game.height-20)
+        self.center_x = random.randint(20, game.width - 20)
+        self.center_y = random.randint(20, game.height - 20)
         self.change_x = 0
         self.change_y = 0
-        
+
+class Pear(arcade.Sprite):
+    def __init__(self, game):
+        super().__init__("15/pear.png")
+        self.score_value = 2
+        self.init_position(game)
+
+    def init_position(self, game):
+        self.width = 30
+        self.height = 30
+        self.center_x = random.randint(20, game.width - 20)
+        self.center_y = random.randint(20, game.height - 20)
+        self.change_x = 0
+        self.change_y = 0
+
+class Poop(arcade.Sprite):
+    def __init__(self, game):
+        super().__init__("15/poop.png")
+        self.score_value = -1
+        self.init_position(game)
+
+    def init_position(self, game):
+        self.width = 30
+        self.height = 30
+        self.center_x = random.randint(20, game.width - 20)
+        self.center_y = random.randint(20, game.height - 20)
+        self.change_x = 0
+        self.change_y = 0
 
 class Snake(arcade.Sprite):
     def __init__(self, game):
@@ -35,42 +66,39 @@ class Snake(arcade.Sprite):
             self.color)
         for part in self.body:
             arcade.draw_rectangle_filled(
-                part['x'], 
+                part['x'],
                 part['y'],
                 self.width,
                 self.height,
                 self.color)
 
-        
     def move(self):
-        self.body.append({'x' : self.center_x, 'y' : self.center_y})
+        self.body.append({'x': self.center_x, 'y': self.center_y})
         if len(self.body) > self.score:
             self.body.pop(0)
         self.center_x += self.change_x * self.speed
         self.center_y += self.change_y * self.speed
 
-    def eat(self, food):
-        del food 
-        self.score += 1
-        print(self.score)
-
-
-
+    def eat(self, food, game):
+        self.score += food.score_value
+        print("Score:", self.score)
+        food.init_position(game)
 
 class Game(arcade.Window):
     def __init__(self):
         super().__init__(width=500, height=500, title="Super Snake 🐍 V1")
         arcade.set_background_color(arcade.color.KHAKI)
-        
+
         self.snake = Snake(self)
-        self.food = Apple(self)
-    
+        self.food_list = [Apple(self), Pear(self), Poop(self)]
+
     def on_draw(self):
         arcade.start_render()
         self.snake.draw()
-        score_text = f"Score: {self.snake.score}"
-        arcade.draw_text(score_text, 10, 10, arcade.color.BLACK, 14)
-        self.food.draw()
+
+        for food in self.food_list:
+            food.draw()
+
         arcade.finish_render()
 
     def on_key_release(self, symbol: int, modifiers: int):
@@ -90,25 +118,10 @@ class Game(arcade.Window):
     def on_update(self, delta_time: float):
         self.snake.move()
 
-        if (
-            self.snake.center_x < 0 or
-            self.snake.center_x > self.width or
-            self.snake.center_y < 0 or
-            self.snake.center_y > self.height
-        ):
-            arcade.set_background_color(arcade.color.KHAKI)
-            arcade.start_render()
-            game_over_text = "Game Over"
-            arcade.draw_text(game_over_text, self.width // 2 - 100, self.height // 2, arcade.color.BLACK, 30)
+        for food in self.food_list:
+            if arcade.check_for_collision(self.snake, food):
+                self.snake.eat(food, self)
 
-            arcade.finish_render()
-            arcade.pause(2)
-            arcade.close_window()
-
-        if arcade.check_for_collision(self.snake, self.food):
-            self.snake.eat(self.food)
-            self.food = Apple(self)
-        
 if __name__ == "__main__":
     game = Game()
     arcade.run()
