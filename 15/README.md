@@ -58,13 +58,7 @@ Screenshots
 
 You can include screenshots of the game to showcase its appearance. To add an image to this README:
 
-1.  Place your screenshot in the same directory as this README.
-2.  Use the following markdown code to display the image:
-
-
 ![Game Screenshot](screenshot.png)
-
-Replace `screenshot.png` with the actual filename of your screenshot.
 
 Acknowledgments
 ---------------
