@@ -49,9 +49,10 @@ Running the Game
 
 Ensure you have Python and the Arcade library installed. Run the game using the following command:
 
-bashCopy code
 
-`python main.py`
+```bash
+python main.py
+```
 
 Screenshots
 -----------
