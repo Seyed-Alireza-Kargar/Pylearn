@@ -1,4 +1,5 @@
 import arcade
+from math import dist
 
 class Snake(arcade.Sprite):
     def __init__(self, game):
@@ -51,3 +52,30 @@ class Snake(arcade.Sprite):
         self.score += food.score
         self.size += food.size
         del food
+
+    def find_best_direction(self, target_x, target_y):
+        possible_moves = [(0, 1), (0, -1), (1, 0), (-1, 0)]
+        distances = []
+
+        for move in possible_moves:
+            new_x = self.center_x + move[0] * self.speed
+            new_y = self.center_y + move[1] * self.speed
+            distances.append(dist((new_x, new_y), (target_x, target_y)))
+
+        best_move = possible_moves[distances.index(min(distances))]
+        return best_move
+
+    def move_towards_food(self, food_list):
+        distances = []
+
+        for food in food_list:
+            target_x, target_y = food.center_x, food.center_y
+            distances.append(dist((self.center_x, self.center_y), (target_x, target_y)))
+
+        if distances:
+            closest_food = food_list[distances.index(min(distances))]
+            target_x, target_y = closest_food.center_x, closest_food.center_y
+            direction = self.find_best_direction(target_x, target_y)
+
+            self.change_x, self.change_y = direction
+            self.move()
