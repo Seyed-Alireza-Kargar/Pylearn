@@ -2,7 +2,7 @@
 
 This simple calculator application is implemented in Python using PySide6 for the graphical user interface. The calculator supports basic arithmetic operations, trigonometric functions, square root, and logarithm.
 
-![Calculator App](screenshot.png)
+![Calculator App](Screenshot.png)
 
 ### Requirements
 
