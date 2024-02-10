@@ -446,7 +446,7 @@ font-size: 23px</string>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: #1991FF;
+     <string notr="true">background-color: #616161;
 border-radius: 16px;
 color: #fff;</string>
     </property>
@@ -474,7 +474,7 @@ color: #fff;</string>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: #1991FF;
+     <string notr="true">background-color: #616161;
 border-radius: 16px;
 color: #fff;</string>
     </property>
