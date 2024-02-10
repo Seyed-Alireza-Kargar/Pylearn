@@ -118,7 +118,7 @@ color: #fff;</string>
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>270</y>
+      <y>390</y>
       <width>51</width>
       <height>51</height>
      </rect>
@@ -142,7 +142,7 @@ color: #29A8FF;</string>
     <property name="geometry">
      <rect>
       <x>70</x>
-      <y>270</y>
+      <y>390</y>
       <width>51</width>
       <height>51</height>
      </rect>
@@ -166,7 +166,7 @@ color: #29A8FF;</string>
     <property name="geometry">
      <rect>
       <x>130</x>
-      <y>270</y>
+      <y>390</y>
       <width>51</width>
       <height>51</height>
      </rect>
@@ -262,7 +262,7 @@ color: #29A8FF;</string>
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>390</y>
+      <y>270</y>
       <width>51</width>
       <height>51</height>
      </rect>
@@ -286,7 +286,7 @@ color: #29A8FF;</string>
     <property name="geometry">
      <rect>
       <x>70</x>
-      <y>390</y>
+      <y>270</y>
       <width>51</width>
       <height>51</height>
      </rect>
@@ -310,7 +310,7 @@ color: #29A8FF;</string>
     <property name="geometry">
      <rect>
       <x>130</x>
-      <y>390</y>
+      <y>270</y>
       <width>51</width>
       <height>51</height>
      </rect>
