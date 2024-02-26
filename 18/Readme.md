@@ -2,7 +2,7 @@
 
 A simple implementation of the classic Tic-Tac-Toe game using Python and PySide6.
 
-![Tic-Tac-Toe Screenshot](screenshot.png)
+![Tic-Tac-Toe Screenshot](./Screenshot.png)
 
 ## Getting Started
 
