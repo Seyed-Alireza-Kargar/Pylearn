@@ -21,7 +21,7 @@
   <a href="#features">Features</a> &#xa0; | &#xa0;
   <a href="#technologies">Technologies</a> &#xa0; | &#xa0;
   <a href="#starting">Starting</a> &#xa0; | &#xa0;
-  <a href="https://github.com/{{YOUR_GITHUB_USERNAME}}" target="_blank">Author</a>
+  <a href="https://github.com/Seyed-Alireza-Kargar" target="_blank">Author</a>
 </p>
 
 <br>
