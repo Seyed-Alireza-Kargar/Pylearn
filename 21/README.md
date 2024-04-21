@@ -37,7 +37,10 @@ ps.make_wav(notes, fn="test.wav")
 Output Music:
 ------------
 
-- [Download Music](./1/test.wav)
+<audio controls>
+  <source src="./1/test.wav" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
 
 
 <br>
