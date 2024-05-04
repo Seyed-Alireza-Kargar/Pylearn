@@ -39,8 +39,10 @@ Output Music:
 
 <audio controls>
   <source src="./1/test.wav" type="audio/mpeg">
-  Your browser does not support the audio element.
+  Your browser does not support this audio.
 </audio>
+
+- [Download Music](./1/test.wav)
 
 
 <br>
