@@ -37,7 +37,7 @@ class Ui_MainWindow(object):
         self.grid_layout = QGridLayout(self.gridLayoutWidget)
         self.grid_layout.setObjectName(u"grid_layout")
         self.grid_layout.setContentsMargins(0, 0, 0, 0)
-        self.grid_layout.setSpacing(2)
+        self.grid_layout.setSpacing(0)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
@@ -49,7 +49,7 @@ class Ui_MainWindow(object):
         self.statusbar.setObjectName(u"statusbar")
         MainWindow.setStatusBar(self.statusbar)
 
-        self.dark_mode_button = QPushButton("Toggle Dark Mode", self.centralwidget)
+        self.dark_mode_button = QPushButton("Dark Mode", self.centralwidget)
         self.dark_mode_button.setGeometry(QRect(10, 560, 150, 30))
 
         self.menubar.addAction(self.menuGame.menuAction())
