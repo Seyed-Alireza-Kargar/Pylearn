@@ -13,11 +13,10 @@ class Mainwindow(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
-        self.dark_mode = False  # Initialize dark_mode state
-        self.solved = False  # Initialize solved state
-        self.solved_puzzle = None  # Store solved puzzle for the solve functionality
+        self.dark_mode = False
+        self.solved = False
+        self.solved_puzzle = None
 
-        # Connect menu actions
         self.ui.menu_new.triggered.connect(self.new_game)
         self.ui.menu_open_file.triggered.connect(self.open_file)
         self.ui.menu_about.triggered.connect(self.show_about)
@@ -26,32 +25,28 @@ class Mainwindow(QMainWindow):
         self.ui.menu_solve.triggered.connect(self.solve_game)
         self.ui.dark_mode_button.clicked.connect(self.toggle_dark_mode)
 
-        # Initialize the grid
         self.line_edit = [[None for _ in range(9)] for _ in range(9)]
         for i in range(9):
             for j in range(9):
                 new_cell = QLineEdit()
-                new_cell.setAlignment(Qt.AlignCenter)  # Center align text
-                new_cell.setFixedSize(50, 50)  # Set square shape
+                new_cell.setAlignment(Qt.AlignCenter)
+                new_cell.setFixedSize(50, 50)
                 self.ui.grid_layout.addWidget(new_cell, i, j)
                 new_cell.textChanged.connect(partial(self.validation, i, j))
                 self.line_edit[i][j] = new_cell
 
-        # Add grid lines
         self.add_grid_lines()
 
         self.new_game()
     
     def add_grid_lines(self):
-        # Add horizontal lines
         for i in range(1, 9):
             if i % 3 == 0:
                 line = QLabel()
                 line.setFixedHeight(2)
                 line.setStyleSheet("background-color: black;")
-                self.ui.grid_layout.addWidget(line, i, 0, 1, 9)
+                self.ui.grid_layout.addWidget(line, i, 0, 0, 9)
 
-        # Add vertical lines
         for j in range(1, 9):
             if j % 3 == 0:
                 line = QLabel()
@@ -82,12 +77,12 @@ class Mainwindow(QMainWindow):
             QMessageBox.critical(self, "Error", f"Failed to load file: {str(e)}")
 
     def new_game(self):
-        self.solved = False  # Reset solved state
+        self.solved = False
         puzzle = Sudoku(3, seed=random.randint(1, 1000)).difficulty(0.5)
-        self.solved_puzzle = puzzle.solve().board  # Store solved puzzle
+        self.solved_puzzle = puzzle.solve().board
         for i in range(9):
             for j in range(9):
-                self.line_edit[i][j].setStyleSheet("")  # Reset styles
+                self.line_edit[i][j].setStyleSheet("")
                 if puzzle.board[i][j] is not None:
                     self.line_edit[i][j].setText(str(puzzle.board[i][j]))
                     self.line_edit[i][j].setReadOnly(True)
@@ -107,7 +102,7 @@ class Mainwindow(QMainWindow):
         valid = True
         for i in range(9):
             for j in range(9):
-                self.line_edit[i][j].setStyleSheet("")  # Reset style
+                self.line_edit[i][j].setStyleSheet("")
 
         for i in range(9):
             if not self.check_line([self.line_edit[i][j].text() for j in range(9)], i, 'row'):
@@ -125,7 +120,7 @@ class Mainwindow(QMainWindow):
 
         if valid and all(self.line_edit[i][j].text() for i in range(9) for j in range(9)):
             QMessageBox.information(self, "Congratulations", "You have completed the puzzle! 🎉")
-            self.new_game()  # Start a new game after showing the message
+            self.new_game()
 
     def check_line(self, line, index, mode):
         seen = set()
@@ -155,18 +150,18 @@ class Mainwindow(QMainWindow):
         return True
 
     def show_about(self):
-        QMessageBox.information(self, "About", "Sudoku Game\nCreated by Your Name")
+        QMessageBox.information(self, "About", "Sudoku Game\nCreated by Alireza\nFor Pylearn Course")
 
     def show_help(self):
         QMessageBox.information(self, "Help", "Fill the grid with numbers 1 to 9.\nNo repeats in any row, column, or 3x3 block.")
 
     def solve_game(self):
-        self.solved = True  # Mark as solved
+        self.solved = True
         for i in range(9):
             for j in range(9):
-                if not self.line_edit[i][j].text():  # Only fill empty cells
+                if not self.line_edit[i][j].text():
                     self.line_edit[i][j].setText(str(self.solved_puzzle[i][j]))
-                    self.line_edit[i][j].setStyleSheet("background-color: lightgreen")
+                    self.line_edit[i][j].setStyleSheet("background-color: lightgreen; color: black;")
                     self.line_edit[i][j].setReadOnly(True)
 
     def toggle_dark_mode(self):
@@ -190,6 +185,7 @@ class Mainwindow(QMainWindow):
             app.setPalette(dark_palette)
 
         self.dark_mode = not self.dark_mode
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

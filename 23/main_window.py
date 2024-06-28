@@ -16,7 +16,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(755, 613)
+        MainWindow.resize(750, 650)
         self.menu_new = QAction(MainWindow)
         self.menu_new.setObjectName(u"menu_new")
         self.menu_open_file = QAction(MainWindow)
@@ -37,7 +37,7 @@ class Ui_MainWindow(object):
         self.grid_layout = QGridLayout(self.gridLayoutWidget)
         self.grid_layout.setObjectName(u"grid_layout")
         self.grid_layout.setContentsMargins(0, 0, 0, 0)
-        self.grid_layout.setSpacing(2)  # Add spacing to differentiate 3x3 blocks
+        self.grid_layout.setSpacing(2)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
