@@ -14,6 +14,7 @@ class Mainwindow(QMainWindow):
         self.ui.setupUi(self)
 
         self.dark_mode = False  # Initialize dark_mode state
+        self.solved = False  # Initialize solved state
         self.solved_puzzle = None  # Store solved puzzle for the solve functionality
 
         # Connect menu actions
@@ -31,12 +32,33 @@ class Mainwindow(QMainWindow):
             for j in range(9):
                 new_cell = QLineEdit()
                 new_cell.setAlignment(Qt.AlignCenter)  # Center align text
+                new_cell.setFixedSize(50, 50)  # Set square shape
                 self.ui.grid_layout.addWidget(new_cell, i, j)
                 new_cell.textChanged.connect(partial(self.validation, i, j))
                 self.line_edit[i][j] = new_cell
 
+        # Add grid lines
+        self.add_grid_lines()
+
         self.new_game()
     
+    def add_grid_lines(self):
+        # Add horizontal lines
+        for i in range(1, 9):
+            if i % 3 == 0:
+                line = QLabel()
+                line.setFixedHeight(2)
+                line.setStyleSheet("background-color: black;")
+                self.ui.grid_layout.addWidget(line, i, 0, 1, 9)
+
+        # Add vertical lines
+        for j in range(1, 9):
+            if j % 3 == 0:
+                line = QLabel()
+                line.setFixedWidth(2)
+                line.setStyleSheet("background-color: black;")
+                self.ui.grid_layout.addWidget(line, 0, j, 9, 1)
+
     def open_file(self):
         try:
             file_path = QFileDialog.getOpenFileName(self, "Open File ...")[0]
@@ -60,6 +82,7 @@ class Mainwindow(QMainWindow):
             QMessageBox.critical(self, "Error", f"Failed to load file: {str(e)}")
 
     def new_game(self):
+        self.solved = False  # Reset solved state
         puzzle = Sudoku(3, seed=random.randint(1, 1000)).difficulty(0.5)
         self.solved_puzzle = puzzle.solve().board  # Store solved puzzle
         for i in range(9):
@@ -78,6 +101,9 @@ class Mainwindow(QMainWindow):
         self.check_board()
 
     def check_board(self):
+        if self.solved:
+            return
+
         valid = True
         for i in range(9):
             for j in range(9):
@@ -135,6 +161,7 @@ class Mainwindow(QMainWindow):
         QMessageBox.information(self, "Help", "Fill the grid with numbers 1 to 9.\nNo repeats in any row, column, or 3x3 block.")
 
     def solve_game(self):
+        self.solved = True  # Mark as solved
         for i in range(9):
             for j in range(9):
                 if not self.line_edit[i][j].text():  # Only fill empty cells

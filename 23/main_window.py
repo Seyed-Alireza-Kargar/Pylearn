@@ -9,8 +9,8 @@
 ################################################################################
 
 from PySide6.QtCore import (QCoreApplication, QMetaObject, QRect, Qt)
-from PySide6.QtGui import (QAction, QIcon)
-from PySide6.QtWidgets import (QApplication, QGridLayout, QMainWindow, QMenu, QMenuBar, QSizePolicy, QStatusBar, QWidget, QPushButton)
+from PySide6.QtGui import (QAction)
+from PySide6.QtWidgets import (QApplication, QGridLayout, QMainWindow, QMenu, QMenuBar, QSizePolicy, QStatusBar, QWidget, QLabel, QPushButton)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
